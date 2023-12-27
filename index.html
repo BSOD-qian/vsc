@@ -1,0 +1,92 @@
+﻿<!doctype html>
+<html lang="zh-CN" class="mdui-theme-auto">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2.0.3/mdui.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/mdui@2.0.3/mdui.global.js"></script>
+    <script type="module">
+        var date = new Date();
+        var month = date.getMonth();
+        var a = new Array(12);
+        a[0] = "#E3002B";
+        a[1] = "#8CC220";
+        a[2] = "#FCD600";
+        a[3] = "#461D84";
+        a[4] = "#944D9A";
+        a[5] = "#D40068";
+        a[6] = "#ED6F00";
+        a[7] = "#0094D8";
+        a[8] = "#87CAED";
+        a[9] = "#C6AFD4";
+        a[10] = "#871C2B";
+        a[11] = "#007B61";
+
+        mdui.setColorScheme(a[month]);
+    </script>
+
+    <title>A small collection</title>
+</head>
+
+<body style="background-color: var(--mdui-color-background); color: var(--mdui-color-on-background);">
+    <style>
+        body {
+            opacity: 0;
+        }
+
+        body.ready {
+            opacity: 1;
+            transition: 0.4s opacity;
+        }
+    </style>
+
+    <script type="module">
+        await Promise.allSettled([
+            customElements.whenDefined('mdui-button'),
+            customElements.whenDefined('mdui-card'),
+            customElements.whenDefined('mdui-checkbox')
+        ]);
+
+        // 现在 button, card, checkbox 组件已经注册完成，添加 ready class，使页面淡入显示
+        document.body.classList.add('ready');
+    </script>
+    <mdui-top-app-bar variant="large" scroll-behavior="shrink elevate" class="">
+        <mdui-button-icon icon="menu" id="drawer_opener"></mdui-button-icon>
+        <mdui-top-app-bar-title>A small collection</mdui-top-app-bar-title>
+        <div style="flex-grow: 1"></div>
+        <mdui-tooltip content="刷新"><mdui-button-icon icon="refresh"
+                onclick="location.reload();"></mdui-button-icon></mdui-tooltip>
+    </mdui-top-app-bar>
+
+    <div class="mdui-prose">
+        <mdui-list>
+            <mdui-list-subheader>2023.12</mdui-list-subheader>
+            <mdui-list-item>
+              周练三词汇
+              <span slot="description">2023.12.27</span>
+              <mdui-button end-icon="arrow_forward" slot="end-icon" href="https://docs.qq.com/sheet/DU0RUaE5SUEViclpZ" target="_blank">Go</mdui-button>
+            </mdui-list-item>
+          </mdui-list>
+    </div>
+    <mdui-navigation-drawer close-on-overlay-click id="drawer" modal close-on-esc close-on-overlay-click>
+        <mdui-list>
+            <mdui-list-item href="./index.html" rounded active>主页</mdui-list-item>
+        </mdui-list>
+    </mdui-navigation-drawer>
+    <script>
+        const navigationDrawer = document.getElementById("drawer");
+        const drawer_openButton = document.getElementById("drawer_opener");
+        //const drawer_closeButton = document.getElementById("drawer_closer");
+
+        drawer_openButton.addEventListener("click", function () { navigationDrawer.open = true });
+        //drawer_closeButton.addEventListener("click", function () { navigationDrawer.open = false });
+    </script>
+</body>
+
+</html>
